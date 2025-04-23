@@ -1,0 +1,32 @@
+{% extends "brawl_stats/base.html" %}
+
+{% block title %}Brawlers List - {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>Brawlers</h2>
+
+{% if brawlers %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rarity</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for brawler in brawlers %}
+            <tr>
+                <td>{{ brawler.name }}</td>
+                <td>{{ brawler.get_rarity_display }}</td>
+                <td>{{ brawler.get_brawler_type_display }}</td>
+                <td>{{ brawler.description|truncatewords:20 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No brawlers found.</p>
+{% endif %}
+{% endblock %}

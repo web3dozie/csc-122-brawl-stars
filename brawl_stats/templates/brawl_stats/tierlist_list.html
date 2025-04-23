@@ -1,0 +1,33 @@
+{% extends "brawl_stats/base.html" %}
+
+{% block title %}Tier Lists - {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>Tier Lists</h2>
+
+{% if tierlists %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Created</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tierlist in tierlists %}
+            <tr>
+                <td>{{ tierlist.name }}</td>
+                <td>{{ tierlist.author.username|default:"Unknown" }}</td>
+                <td>{{ tierlist.created_at|date:"Y-m-d H:i" }}</td>
+                <td>{{ tierlist.description|truncatewords:20 }}</td>
+                {# Optional: Link to a detail view later #}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No tier lists found.</p>
+{% endif %}
+{% endblock %}
